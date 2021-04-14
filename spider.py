@@ -57,14 +57,14 @@ def parse_html(html):
         # 公司名称
         company_name = html_xpath.xpath("//div[contains(@class, 'tHeader')]/div[@class='in']/div[@class='cn']/p[@class='cname']/a/@title")
         company_name = company_name[0]
-        # print("company_name:{}".format(company_name))
+        print("company_name:{}".format(company_name))
         # 工作地点
         info = html_xpath.xpath("//div[contains(@class, 'tHeader')]/div[@class='in']/div[@class='cn']/p[contains(@class, 'msg')]/@title")
         info = re.sub('[(xa0)(|)]', '', info[0])
         info = info.split()
         work_place = info[0]
-        # print("work_place:{}".format(work_place))
-        # 工作经验
+        print("work_place:{}".format(work_place))
+        # 工作经
         work_year = info[1]
         # print("work_year:{}".format(work_year))
         # 学历
@@ -117,7 +117,8 @@ def save_csv(items):
             company_size = i[8]
             industry = i[9]
             salary = i[10]
-    # print(job_title, company_name, work_place, work_place, education, recruit_number, release_time,  company_nature, company_size, industry, salary)
+            print(job_title, company_name, work_place, work_place, education, recruit_number, release_time,  company_nature, company_size, industry, salary)
+
             sql = """insert into book_share_db.wether_test(job_title, company_name, work_place, work_year, education, recruit_number, release_time,  company_nature, company_size, industry, salary)   values( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
             cursor.execute(sql, (job_title, company_name, work_place, work_year, education, recruit_number, release_time, company_nature, company_size, industry, salary))
             db.commit()
